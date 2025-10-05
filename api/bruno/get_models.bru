@@ -1,0 +1,15 @@
+meta {
+  name: get_models
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{BASE_URL}}/ai-orchestration-api/v1/models
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
