@@ -1,0 +1,29 @@
+meta {
+  name: generate_token
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{BASE_URL}}/auth-engine-api/v1/api-key/token
+  body: json
+  auth: none
+}
+
+headers {
+  accept: /
+  Content-Type: application/json
+  FlowTenant: Stretto
+}
+
+body:json {
+  {
+    "clientId": "{{CLIENT_ID}}",
+    "clientSecret": "{{CLIENT_SECRET}}",
+    "appToAccess": "llm-api"
+  }
+}
+
+settings {
+  encodeUrl: true
+}
