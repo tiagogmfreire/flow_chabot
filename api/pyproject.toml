@@ -10,6 +10,7 @@ dependencies = [
     "langchain>=0.3.27",
     "langchain-chroma>=0.2.6",
     "langchain-community>=0.3.30",
+    "langchain-openai>=0.3.35",
     "pyjwt>=2.10.1",
     "pypdf>=6.1.1",
     "python-dotenv>=1.1.1",

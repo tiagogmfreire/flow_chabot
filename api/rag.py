@@ -1,5 +1,13 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain.chat_models import init_chat_model
+from langchain_openai import OpenAIEmbeddings
+from langchain_chroma import Chroma
+from flow import generate_token
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # PDF parsing
 file_path = (
@@ -25,4 +33,30 @@ text_splitter = RecursiveCharacterTextSplitter(
 )
 all_splits = text_splitter.split_documents(pages)
 
-print(f"Split file {len(all_splits)} sub-documents.")
+# print(f"Split file {len(all_splits)} sub-documents.")
+
+flow_token = generate_token()
+
+print(flow_token)
+
+# chat model
+llm = init_chat_model(
+    "gpt-4o-mini", 
+    model_provider="openai",
+    openai_api_base=os.getenv('BASE_URL'),
+    openai_api_key=flow_token
+)
+
+# embeddings model
+embeddings = OpenAIEmbeddings(
+    model="text-embedding-3-large",
+    openai_api_base=os.getenv('BASE_URL'),
+    openai_api_key=flow_token
+)
+
+# vector store
+# vector_store = Chroma(
+#     collection_name="example_collection",
+#     embedding_function=embeddings,
+#     persist_directory="./chroma_langchain_db",  # Where to save data locally, remove if not necessary
+# )
