@@ -1,9 +1,16 @@
 import os
-import jwt
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
 
-token = jwt.encode({"some": "payload"}, os.getenv("API_KEY"), algorithm="HS256")
+base_url = os.getenv("BASE_URL")
+client_id = os.getenv("CLIENT_ID")
+client_secret = os.getenv("CLIENT_SECRET")
 
-print(token)
+response = requests.get(
+    str(base_url + "/ai-orchestration-api/v1/health")
+)
+
+print(response.status_code)
+print(response.text)
