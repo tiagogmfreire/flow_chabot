@@ -1,7 +1,11 @@
 from fastapi import FastAPI
+from flow import generate_token
 
 app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+
+    token = generate_token()
+
+    return {"message": token}
