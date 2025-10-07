@@ -42,16 +42,17 @@ flow_token = generate_token()
 # chat model
 llm = init_chat_model(
     "gpt-4o-mini", 
-    model_provider="openai",
-    openai_api_base=os.getenv('BASE_URL'),
-    openai_api_key=flow_token
+    model_provider="azure-openai",
+    azure_endpoint=os.getenv('BASE_URL'),
+    openai_api_key=flow_token,
+    api_version='3.0.0'
 )
 
 # print(llm)
 
 # embeddings model
 embeddings = OpenAIEmbeddings(
-    model="text-embedding-3-large",
+    model="text-embedding-ada-002",
     openai_api_base=os.getenv('BASE_URL'),
     openai_api_key=flow_token
 )
