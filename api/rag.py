@@ -2,6 +2,8 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.chat_models import init_chat_model
 from langchain_openai import OpenAIEmbeddings
+from langchain_openai import AzureChatOpenAI
+from langchain_openai import AzureOpenAIEmbeddings
 from langchain_chroma import Chroma
 from flow import generate_token
 from dotenv import load_dotenv
@@ -40,12 +42,19 @@ flow_token = generate_token()
 # print(flow_token)
 
 # chat model
-llm = init_chat_model(
-    "gpt-4o-mini", 
-    model_provider="azure-openai",
-    azure_endpoint=os.getenv('BASE_URL'),
+# llm = init_chat_model(
+#     "gpt-4o-mini", 
+#     model_provider="azure-openai",
+#     azure_endpoint=os.getenv('BASE_URL'),
+#     openai_api_key=flow_token,
+#     api_version='3.0.0'
+# )
+
+llm = AzureChatOpenAI(
     openai_api_key=flow_token,
-    api_version='3.0.0'
+    azure_endpoint=os.getenv('BASE_URL'),
+    azure_deployment='flow-core-llm-eaus-ca',
+    openai_api_version='3.0.0',
 )
 
 # print(llm)
