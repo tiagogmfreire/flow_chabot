@@ -1,0 +1,15 @@
+meta {
+  name: get_providers
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{BASE_URL}}/ai-orchestration-api/v1/provider-secrets
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
