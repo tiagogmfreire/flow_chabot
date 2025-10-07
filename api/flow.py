@@ -30,8 +30,4 @@ def generate_token():
 
     json = response.json()
 
-    # print(json['access_token'])
-    # print(response.status_code)
-    # print(response.json()))
-
     return json['access_token']
