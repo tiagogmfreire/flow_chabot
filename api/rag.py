@@ -37,7 +37,7 @@ all_splits = text_splitter.split_documents(pages)
 
 flow_token = generate_token()
 
-print(flow_token)
+# print(flow_token)
 
 # chat model
 llm = init_chat_model(
@@ -47,6 +47,8 @@ llm = init_chat_model(
     openai_api_key=flow_token
 )
 
+# print(llm)
+
 # embeddings model
 embeddings = OpenAIEmbeddings(
     model="text-embedding-3-large",
@@ -54,9 +56,19 @@ embeddings = OpenAIEmbeddings(
     openai_api_key=flow_token
 )
 
+# print(embeddings)
+
 # vector store
-# vector_store = Chroma(
-#     collection_name="example_collection",
-#     embedding_function=embeddings,
-#     persist_directory="./chroma_langchain_db",  # Where to save data locally, remove if not necessary
-# )
+vector_store = Chroma(
+    collection_name="example_collection",
+    embedding_function=embeddings,
+    persist_directory="./chroma_langchain_db",  # Where to save data locally, remove if not necessary
+)
+
+# print(vector_store)
+
+document_ids = vector_store.add_documents(documents=all_splits)
+
+# print(document_ids)
+
+# print(document_ids[:3])
