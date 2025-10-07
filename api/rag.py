@@ -7,7 +7,7 @@ file_path = (
 loader = PyPDFLoader(file_path)
 pages = []
 
-for page in loader.alazy_load():
+for page in loader.lazy_load():
     pages.append(page)
 
 print(f"{pages[0].metadata}\n")
