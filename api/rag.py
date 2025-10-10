@@ -6,6 +6,8 @@ from sentence_transformers import SentenceTransformer
 from langchain_chroma import Chroma
 from flow import generate_token
 from dotenv import load_dotenv
+import requests
+import json
 import os
 import sys
 
@@ -22,8 +24,8 @@ pages = []
 for page in loader.lazy_load():
     pages.append(page)
 
-# print(f"{pages[0].metadata}\n")
-# print(pages[0].page_content)
+print(f"{pages[0].metadata}\n")
+print(pages[0].page_content)
 
 # splitting doc
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -36,7 +38,7 @@ text_splitter = RecursiveCharacterTextSplitter(
 
 all_splits = text_splitter.split_documents(pages)
 
-# print(f"Split file {len(all_splits)} sub-documents.")
+print(f"Split file {len(all_splits)} sub-documents.")
 
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
 
@@ -51,3 +53,38 @@ document_ids = vector_store.add_documents(documents=all_splits)
 print(document_ids)
 
 print(document_ids[:3])
+
+# flow api request
+
+payload = {
+  "stream": False,
+  "max_tokens": 4096,
+  "temperature": 0.7,
+  "allowedModels": [
+    "gpt-4o-mini"
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "Give me a list of the days of the week."
+    }
+  ]
+}
+
+token = generate_token()
+
+print(token)
+
+url = str(os.getenv("BASE_URL") + "/ai-orchestration-api/v1/openai/chat/completions")
+
+headers = {
+    "Authorization": str("Bearer " + token),
+    "FlowTenant": "Stretto",
+    "FlowAgent": "default-agent"
+}
+
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+body = response.json()
+
+print("###############")
+print(body)
