@@ -1,11 +1,8 @@
 from fastapi import FastAPI
-from flow import generate_token
-
+from controllers.APIController import APIController
 app = FastAPI()
 
 @app.get("/")
 async def root():
 
-    token = generate_token()
-
-    return {"message": token}
+    return APIController.index()
