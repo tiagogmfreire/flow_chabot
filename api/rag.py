@@ -79,6 +79,7 @@ url = str(os.getenv("BASE_URL") + "/ai-orchestration-api/v1/openai/chat/completi
 
 headers = {
     "Authorization": str("Bearer " + token),
+    'Content-Type' : 'application/json',
     "FlowTenant": "Stretto",
     "FlowAgent": "default-agent"
 }
