@@ -4,7 +4,7 @@ from langchain.chat_models import init_chat_model
 from langchain_huggingface import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer
 from langchain_chroma import Chroma
-from flow import generate_token
+from services.flow_service import FlowService
 from dotenv import load_dotenv
 import requests
 import json
@@ -75,38 +75,8 @@ Original system instruction:
 {original_prompt}
 """
 
-# print(enhanced_prompt)
+flow = FlowService()
 
-payload = {
-  "stream": False,
-  "max_tokens": 4096,
-  "temperature": 0.7,
-  "allowedModels": [
-    "gpt-4o-mini"
-  ],
-  "messages": [
-    {
-      "role": "user",
-      "content": enhanced_prompt
-    }
-  ]
-}
+response = flow.chat_completions(enhanced_prompt)
 
-token = generate_token()
-
-# print(token)
-
-url = str(os.getenv("BASE_URL") + "/ai-orchestration-api/v1/openai/chat/completions")
-
-headers = {
-    "Authorization": str("Bearer " + token),
-    'Content-Type' : 'application/json',
-    "FlowTenant": "Stretto",
-    "FlowAgent": "default-agent"
-}
-
-response = requests.post(url, headers=headers, data=json.dumps(payload))
-body = response.json()
-
-print("###############")
-print(body)
+print(response)
