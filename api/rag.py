@@ -24,8 +24,8 @@ pages = []
 for page in loader.lazy_load():
     pages.append(page)
 
-print(f"{pages[0].metadata}\n")
-print(pages[0].page_content)
+# print(f"{pages[0].metadata}\n")
+# print(pages[0].page_content)
 
 # splitting doc
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -38,7 +38,7 @@ text_splitter = RecursiveCharacterTextSplitter(
 
 all_splits = text_splitter.split_documents(pages)
 
-print(f"Split file {len(all_splits)} sub-documents.")
+# print(f"Split file {len(all_splits)} sub-documents.")
 
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
 
@@ -56,6 +56,27 @@ print(document_ids[:3])
 
 # flow api request
 
+original_prompt = "Tell me about the Debtor"
+
+snippets = vector_store.similarity_search(original_prompt)
+
+context = ""
+
+for snippet in snippets:
+    context += str(snippet.page_content + "\n\n")
+
+enhanced_prompt = f"""
+Use the following context to answer the user's question:
+
+Context:
+{context}
+
+Original system instruction:
+{original_prompt}
+"""
+
+# print(enhanced_prompt)
+
 payload = {
   "stream": False,
   "max_tokens": 4096,
@@ -66,14 +87,14 @@ payload = {
   "messages": [
     {
       "role": "user",
-      "content": "Give me a list of the days of the week."
+      "content": enhanced_prompt
     }
   ]
 }
 
 token = generate_token()
 
-print(token)
+# print(token)
 
 url = str(os.getenv("BASE_URL") + "/ai-orchestration-api/v1/openai/chat/completions")
 
