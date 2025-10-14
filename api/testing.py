@@ -1,13 +1,14 @@
 from services.rag_service import RagService
 from services.flow_service import FlowService
 from models.vector_model import VectorModel
+import sys
 
 # PDF parsing
 file_path = (
-    "contract_example.pdf"
+    "uploaded_files/contract_example.pdf"
 )
 
-original_prompt = "Tell me about the Debtor"
+original_prompt = sys.argv[1]
 
 vector = VectorModel()
 
