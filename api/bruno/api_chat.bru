@@ -1,0 +1,17 @@
+meta {
+  name: api_chat
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{API}}/chat
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "message":"tell me about the debtor"
+  }
+}

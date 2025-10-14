@@ -1,7 +1,11 @@
-from fastapi import FastAPI, File, UploadFile
-from typing import Annotated
+from fastapi import FastAPI, File, UploadFile, Request
 from controllers.APIController import APIController
+from services.rag_service import RagService
+from services.flow_service import FlowService
+from models.vector_model import VectorModel
+from services.chat_service import ChatService
 import shutil
+import json
 
 app = FastAPI()
 
@@ -33,3 +37,22 @@ async def create_upload_file(file: UploadFile = File(...)):
     finally:
         # Ensure the file handle is closed
         file.file.close()
+
+@app.post("/chat")
+async def chat(request: Request):
+
+    body = await request.body()
+
+    string = json.loads(body)
+
+    prompt = string['chat']
+
+    vector = VectorModel()
+    rag = RagService(vector)
+    flow = FlowService()
+
+    chat = ChatService(rag, flow)
+
+    response = chat.chat(prompt)
+    
+    return {"received_body": response}
