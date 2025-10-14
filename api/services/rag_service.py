@@ -1,19 +1,11 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_chroma import Chroma
 
 class RagService:
 
-    def __init__(self):
+    def __init__(self, vector_store):
 
-        embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
-
-        self.vector_store = vector_store = Chroma(
-            collection_name="example_collection",
-            embedding_function=embeddings,
-            persist_directory="./chroma_langchain_db",  # Where to save data locally, remove if not necessary
-        )
+        self.vector_store = vector_store
 
     def parse_doc(self, file_path):
 
