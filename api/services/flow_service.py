@@ -69,4 +69,12 @@ class FlowService:
         response = requests.post(url, headers=headers, data=json.dumps(payload))
         body = response.json()
 
-        return body
+        choices = body.get('choices')
+        
+        message = 'error'
+
+        if choices:
+            message = choices[0]
+            message = message.get('message', 'error').get('content', 'error')
+
+        return message

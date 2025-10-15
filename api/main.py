@@ -55,4 +55,4 @@ async def chat(request: Request):
 
     response = chat.chat(prompt)
     
-    return {"received_body": response}
+    return {"message": response}
