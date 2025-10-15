@@ -8,18 +8,43 @@ export default function ChatBot() {
     { text: "Hi! How can I help you today?", isBot: true }
   ]);
 
-  const handleSendMessage = (message) => {
-    // Add user message
-    setMessages(prev => [...prev, { text: message, isBot: false }]);
-    
-    // Simulate bot response (replace with actual API call later)
-    setTimeout(() => {
-      setMessages(prev => [...prev, { 
-        text: `I received: "${message}"`, 
-        isBot: true 
-      }]);
-    }, 1000);
-  };
+    const handleSendMessage = async (message) => {
+        // Add user message
+        setMessages(prev => [...prev, { text: message, isBot: false }]);
+        
+        // Set loading state
+        setMessages(prev => [...prev, { text: "...", isBot: true, loading: true }]);
+        
+        try {
+            // Replace with your actual API endpoint
+            const response = await fetch('http://127.0.0.1:8000/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ "chat": message }),
+            });
+            
+            const data = await response.json();
+            
+            // Replace loading message with actual response
+            setMessages(prev => 
+                prev.map((msg, i) => 
+                    i === prev.length - 1 ? { text: data.reply, isBot: true } : msg
+                )
+            );
+        } catch (error) {
+
+            console.log(error);
+
+            // Handle errors
+            setMessages(prev => 
+                prev.map((msg, i) => 
+                    i === prev.length - 1 ? { text: "Sorry, I'm having trouble responding right now.", isBot: true } : msg
+                )
+            );
+        }
+    };
 
   return (
     <div className="w-[350px] h-[500px] border border-gray-300 rounded-lg flex flex-col overflow-hidden">
