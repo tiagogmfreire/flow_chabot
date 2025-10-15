@@ -26,11 +26,13 @@ export default function ChatBot() {
             });
             
             const data = await response.json();
+
+            // console.log(data);
             
             // Replace loading message with actual response
             setMessages(prev => 
                 prev.map((msg, i) => 
-                    i === prev.length - 1 ? { text: data.reply, isBot: true } : msg
+                    i === prev.length - 1 ? { text: data.message, isBot: true } : msg
                 )
             );
         } catch (error) {
