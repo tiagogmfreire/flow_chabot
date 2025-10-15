@@ -13,15 +13,23 @@ export default function ChatInput({ onSendMessage }) {
   };
 
   return (
-    <form className="chat-input-form" onSubmit={handleSubmit}>
+    <form 
+      className="flex p-2 border-t border-gray-200" 
+      onSubmit={handleSubmit}
+    >
       <input
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Type a message..."
-        className="chat-input"
+        className="flex-1 px-3 py-2 border border-gray-300 rounded-full mr-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
       />
-      <button type="submit" className="send-button">Send</button>
+      <button 
+        type="submit" 
+        className="bg-blue-500 text-white border-none rounded-full px-4 py-2 hover:bg-blue-600 transition-colors cursor-pointer"
+      >
+        Send
+      </button>
     </form>
   );
 }

@@ -1,5 +1,6 @@
 ---
 import ChatBot from '../components/ChatBot.jsx';
+import '../styles/global.css';
 ---
 
 <html lang="en">
@@ -11,7 +12,13 @@ import ChatBot from '../components/ChatBot.jsx';
         <title>Chatbot</title>
     </head>
     <body>
-        <h1>Chatbot</h1>
-        <ChatBot client:load />
+        <main class="flex flex-col items-center p-8 min-h-screen">
+
+            <h1 class="text-2xl font-bold mb-4">Simple React Chatbot</h1>
+
+            <div class="mt-8">
+                <ChatBot client:load />
+            </div>
+        </main>
     </body>
 </html>
