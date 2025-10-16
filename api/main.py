@@ -45,6 +45,10 @@ async def create_upload_file(file: UploadFile = File(...)):
         # Save the uploaded file in chunks to handle large files efficiently
         with open(file_location, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
+
+        vector = VectorModel()
+        rag = RagService(vector)
+        rag.parse_doc(file_path=file_location)
         
         return {"message": f"Successfully uploaded {file.filename}", "location": file_location}
     except Exception as e:
