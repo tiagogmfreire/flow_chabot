@@ -1,5 +1,6 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+import os
 
 class RagService:
 
@@ -8,6 +9,9 @@ class RagService:
         self.vector_store = vector_store
 
     def parse_doc(self, file_path):
+
+        if not os.path.exists(file_path):
+            return []
 
         loader = PyPDFLoader(file_path)
         pages = []
@@ -33,9 +37,10 @@ class RagService:
 
     def enhance_prompt(self, original_prompt):
 
-        original_prompt = "Tell me about the Debtor"
-
         snippets = self.vector_store.similarity_search(original_prompt)
+
+        if not snippets: 
+            return original_prompt
 
         context = ""
 
