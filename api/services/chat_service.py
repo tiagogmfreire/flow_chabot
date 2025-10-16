@@ -1,6 +1,6 @@
 class ChatService:
 
-    def __init__(self, rag_service, flow_service, file_path = "uploaded_files/contract_example.pdf"):
+    def __init__(self, rag_service, flow_service, file_path = "uploaded_files/rag.pdf"):
         self.rag_service  = rag_service
         self.flow_service = flow_service
         self.file_path    = file_path

@@ -36,7 +36,7 @@ async def create_upload_file(file: UploadFile = File(...)):
     """
     try:
         # Define the path where the file will be saved
-        file_location = f"uploaded_files/{file.filename}"
+        file_location = f"uploaded_files/rag.pdf"
         
         # Create the directory if it doesn't exist (optional, but good practice)
         import os
