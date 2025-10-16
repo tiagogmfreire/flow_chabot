@@ -49,7 +49,7 @@ export default function ChatBot() {
     };
 
   return (
-    <div className="w-[350px] h-[500px] border border-gray-300 rounded-lg flex flex-col overflow-hidden">
+    <div className="w-7xl h-[500px] border border-gray-300 rounded-lg flex flex-col overflow-hidden">
       <div className="flex-1 overflow-y-auto p-4 flex flex-col">
         {messages.map((msg, index) => (
           <ChatMessage key={index} message={msg} />
