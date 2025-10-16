@@ -1,6 +1,10 @@
 // src/components/FileUpload.jsx
 import React, { useState } from 'react';
 
+const api = import.meta.env.PUBLIC_API
+
+// console.log(api);
+
 export default function FileUpload({ onFileUpload }) {
   const [file, setFile] = useState(null);
 
@@ -22,7 +26,7 @@ export default function FileUpload({ onFileUpload }) {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/uploadfile', {
+      const response = await fetch(`${api}/uploadfile`, {
         method: 'POST',
         body: formData,
       });
