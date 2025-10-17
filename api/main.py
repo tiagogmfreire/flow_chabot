@@ -1,6 +1,5 @@
 from fastapi import FastAPI, File, UploadFile, Request
 from fastapi.middleware.cors import CORSMiddleware
-from controllers.APIController import APIController
 from services.rag_service import RagService
 from services.flow_service import FlowService
 from models.vector_model import VectorModel
@@ -27,7 +26,11 @@ app.add_middleware(
 @app.get("/")
 async def root():
 
-    return APIController.index()
+    data = {
+        "message" : "OK!"
+    }
+
+    return data
 
 @app.post("/uploadfile/")
 async def create_upload_file(file: UploadFile = File(...)):
