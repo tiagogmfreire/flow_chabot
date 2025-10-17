@@ -4,6 +4,8 @@ A very bare bones hands on project to implement RAG using Python, Fastapi, Langc
 
 I was worried that I would not be able to finish it on time so I ended up skipping automated testing for now.
 
+![rag](https://github.com/user-attachments/assets/4912eedd-e72e-44a4-b595-d35b0f9eb7bb)
+
 ## Backend
 
 The backend was developed using Python managed by [uv](https://docs.astral.sh/uv/) with Fastapi and Langchain.
