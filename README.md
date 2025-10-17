@@ -1,8 +1,8 @@
 # About
 
-A very bare bones hands on project to implement RAG Python, Fastapi, Langchain, React and the CI&T Flow API.
+A very bare bones hands on project to implement RAG using Python, Fastapi, Langchain, React and the CI&T Flow API.
 
-I was worried that would not be able to finish it on time so I ended up skipping automated testing.
+I was worried that I would not be able to finish it on time so I ended up skipping automated testing for now.
 
 ## Backend
 
@@ -17,7 +17,7 @@ uv run fastapi dev
 
 Since Create React App has been deprecated, I used Astro JS with the native React integration + Tailwind.
 
-Also, the frontend is very rough looking at the moment.
+But I barely added any CSS so the frontend is looking very rough at the moment.
 
 ```BASH
 npm install
