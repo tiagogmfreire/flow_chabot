@@ -8,7 +8,7 @@ I was worried that I would not be able to finish it on time so I ended up skippi
 
 The backend was developed using Python managed by [uv](https://docs.astral.sh/uv/) with Fastapi and Langchain.
 
-Make sure (uv is installed)[https://docs.astral.sh/uv/getting-started/installation/], then run:
+Make sure [uv is installed](https://docs.astral.sh/uv/getting-started/installation/), then run:
 
 ```BASH
 uv sync
