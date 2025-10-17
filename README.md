@@ -28,14 +28,16 @@ npm run dev
 
 ## Todos/Improvements
 
-- api
-  - add an uvicorn entrypoint for production environment
-  - add automated tests
-  - add caching the Flow token
-  - Replace requests with httpx
-  - Use more async methods
-  - troubleshoot installing torch on a Mac OS 15 with Intel CPU
--frontend
-  - add automated tests
-  - scroll the messages automatically
-  - improve the UI
+api
+- add an uvicorn entrypoint for production environment
+- add automated tests
+- add caching the Flow token
+- Replace requests with httpx
+- Use more async methods
+- troubleshoot installing torch on a Mac OS 15 with Intel CPU
+
+frontend
+- refactor file upload notification to not use alert
+- add automated tests
+- scroll the messages automatically
+- improve the UI
